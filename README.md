@@ -1,5 +1,7 @@
 # Face Detection System in JavaScript
 
+![Banner](https://raw.githubusercontent.com/thesiamak01/face-detection-js/refs/heads/main/cover.png)
+
 This is a lightweight face detection system built purely with JavaScript and the Canvas API, without any external libraries or dependencies. The system uses the user's webcam to detect and track facial features in real-time.
 
 ## Features
