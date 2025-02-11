@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Detection</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <h1>Face Detection</h1>
+    <video id="webcam" autoplay playsinline ></video>
+    <canvas id="canvas" width="640" height="480"></canvas>
+    <script src="script.min.js"></script>
+    <script>
+        const video = document.getElementById('webcam');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+        async function setupWebcam() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+            } catch (err) {
+                console.error("WebCam Access: ", err);
+            }
+        }
+        function startFaceDetection() {
+            setInterval(() => {
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                detectFaceAndFeatures();
+            }, 100);
+        }
+        setupWebcam().then(() => {
+            video.onloadedmetadata = () => {
+                startFaceDetection();
+            };
+        });
+    </script>
+</body>
+</html>
